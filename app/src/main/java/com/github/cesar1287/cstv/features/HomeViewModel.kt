@@ -13,6 +13,10 @@ class HomeViewModel @Inject constructor(
     private val homePagingSource: HomePagingSource
 ) : ViewModel() {
 
+    fun handleError(error: Throwable) {
+
+    }
+
     val flow = Pager(
         // Configure how data is loaded by passing additional properties to
         // PagingConfig, such as prefetchDistance.
