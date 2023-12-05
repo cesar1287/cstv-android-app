@@ -6,11 +6,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.cesar1287.cstv.databinding.MatchItemBinding
-import com.github.cesar1287.cstv.model.MatchesResponseItem
+import com.github.cesar1287.cstv.model.vo.MatchVO
 
 class HomeAdapter(
-    private val onMatchClicked: (MatchesResponseItem?) -> Unit
-) : PagingDataAdapter<MatchesResponseItem, HomeViewHolder>(MatchItemComparator()) {
+    private val onMatchClicked: (MatchVO?) -> Unit
+) : PagingDataAdapter<MatchVO, HomeViewHolder>(MatchItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         return HomeViewHolder(
@@ -29,12 +29,15 @@ class HomeViewHolder(
     private val binding: MatchItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(matchVO: MatchesResponseItem?, onMatchClicked: (MatchesResponseItem?) -> Unit) {
+    fun bind(
+        matchVO: MatchVO?,
+        onMatchClicked: (MatchVO?) -> Unit
+    ) {
         with(binding) {
-            tvMatchLeagueSeries.text = matchVO?.name
+            tvMatchLeagueSeries.text = matchVO?.nameLeagueSerie
 
-            tvMatchTeamA.text = matchVO?.name
-            tvMatchTeamB.text = matchVO?.name
+            tvMatchTeamA.text = matchVO?.nameTeamA
+            tvMatchTeamB.text = matchVO?.logoTeamB
 
             vgMatchCardContainer.setOnClickListener {
                 onMatchClicked(matchVO)
@@ -43,13 +46,13 @@ class HomeViewHolder(
     }
 }
 
-class MatchItemComparator : DiffUtil.ItemCallback<MatchesResponseItem>() {
-    override fun areItemsTheSame(oldItem: MatchesResponseItem, newItem: MatchesResponseItem): Boolean {
+class MatchItemComparator : DiffUtil.ItemCallback<MatchVO>() {
+    override fun areItemsTheSame(oldItem: MatchVO, newItem: MatchVO): Boolean {
         // Id is unique.
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: MatchesResponseItem, newItem: MatchesResponseItem): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItem: MatchVO, newItem: MatchVO): Boolean {
+        return oldItem.serieId == newItem.serieId
     }
 }
