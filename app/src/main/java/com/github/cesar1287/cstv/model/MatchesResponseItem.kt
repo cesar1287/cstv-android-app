@@ -32,6 +32,7 @@ fun MatchesResponseItem.toUIModel(): MatchVO {
         logoTeamA = teamA?.imageUrl ?: "",
         nameTeamB = teamB?.name ?: "",
         logoTeamB = teamB?.imageUrl ?: "",
-        nameLeagueSerie = "${league.name} - ${serie.fullName}"
+        nameLeagueSerie = "${league.name} - ${serie.fullName}",
+        logoLeague = league.imageUrl
     )
 }

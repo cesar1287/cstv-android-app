@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.github.cesar1287.cstv.databinding.MatchItemBinding
 import com.github.cesar1287.cstv.model.vo.MatchVO
 
@@ -37,7 +38,22 @@ class HomeViewHolder(
             tvMatchLeagueSeries.text = matchVO?.nameLeagueSerie
 
             tvMatchTeamA.text = matchVO?.nameTeamA
-            tvMatchTeamB.text = matchVO?.logoTeamB
+            tvMatchTeamB.text = matchVO?.nameTeamB
+
+            Glide
+                .with(itemView.context)
+                .load(matchVO?.logoTeamA)
+                .into(ivMatchTeamA)
+
+            Glide
+                .with(itemView.context)
+                .load(matchVO?.logoTeamB)
+                .into(ivMatchTeamB)
+
+            Glide
+                .with(itemView.context)
+                .load(matchVO?.logoLeague)
+                .into(ivMatchLeagueSeries)
 
             vgMatchCardContainer.setOnClickListener {
                 onMatchClicked(matchVO)
