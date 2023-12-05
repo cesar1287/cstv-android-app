@@ -3,24 +3,25 @@ package com.github.cesar1287.cstv.features
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.cesar1287.cstv.api.PandaScoreApi
-import com.github.cesar1287.cstv.model.MatchesResponseItem
+import com.github.cesar1287.cstv.model.toUIModel
+import com.github.cesar1287.cstv.model.vo.MatchVO
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
 class HomePagingSource @Inject constructor(
     private val pandaScoreApi: PandaScoreApi
-): PagingSource<Int, MatchesResponseItem>() {
+): PagingSource<Int, MatchVO>() {
 
     override suspend fun load(
         params: LoadParams<Int>
-    ): LoadResult<Int, MatchesResponseItem> {
+    ): LoadResult<Int, MatchVO> {
         return try {
             // Start refresh at page 1 if undefined.
             val nextPageNumber = params.key ?: 1
             val response = pandaScoreApi.getMatches(nextPageNumber)
             LoadResult.Page(
-                data = response.body()?.map { it } ?: listOf(),
+                data = response.body()?.map { it.toUIModel() } ?: listOf(),
                 prevKey = null, // Only paging forward.
                 nextKey = nextPageNumber + 1
             )
@@ -33,7 +34,7 @@ class HomePagingSource @Inject constructor(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, MatchesResponseItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, MatchVO>): Int? {
         // Try to find the page key of the closest page to anchorPosition from
         // either the prevKey or the nextKey; you need to handle nullability
         // here.

@@ -1,27 +1,37 @@
 package com.github.cesar1287.cstv.model
 
+import android.os.Parcelable
+import com.github.cesar1287.cstv.model.vo.MatchVO
+import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class MatchesResponseItem(
-    val detailed_stats: Boolean,
-    val draw: Boolean,
-    val forfeit: Boolean,
-    val game_advantage: Any,
     val id: Int,
     val league: League,
-    val league_id: Int,
-    val match_type: String,
-    val modified_at: String,
+    @SerializedName("league_id")
+    val leagueId: Int,
     val name: String,
-    val number_of_games: Int,
     val opponents: List<Opponent>,
-    val original_scheduled_at: String,
-    val rescheduled: Boolean,
+    @SerializedName("original_scheduled_at")
+    val originalScheduledAt: String,
     val serie: Serie,
-    val serie_id: Int,
-    val slug: String,
-    val status: String,
-    val tournament: Tournament,
-    val tournament_id: Int,
-    val winner: WinnerX,
-    val winner_id: Int,
-    val winner_type: String
-)
+    @SerializedName("serie_id")
+    val serieId: Int,
+    val status: String
+) : Parcelable
+
+fun MatchesResponseItem.toUIModel(): MatchVO {
+    val teamA = this.opponents.firstOrNull()?.opponent
+    val teamB = this.opponents.lastOrNull()?.opponent
+
+    return MatchVO(
+        id = this.id,
+        serieId = this.serieId,
+        nameTeamA = teamA?.name ?: "",
+        logoTeamA = teamA?.imageUrl ?: "",
+        nameTeamB = teamB?.name ?: "",
+        logoTeamB = teamB?.imageUrl ?: "",
+        nameLeagueSerie = "${league.name} - ${serie.fullName}"
+    )
+}
