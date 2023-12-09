@@ -1,7 +1,7 @@
 package com.github.cesar1287.cstv.model.vo
 
 import android.os.Parcelable
-import com.github.cesar1287.cstv.model.MatchStatus
+import com.github.cesar1287.cstv.model.api.MatchStatus
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

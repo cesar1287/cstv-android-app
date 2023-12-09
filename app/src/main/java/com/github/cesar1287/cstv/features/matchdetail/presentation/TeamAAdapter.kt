@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.cesar1287.cstv.R
 import com.github.cesar1287.cstv.databinding.TeamAItemBinding
-import com.github.cesar1287.cstv.model.Player
+import com.github.cesar1287.cstv.model.vo.PlayerVO
 
 class TeamAAdapter :
-    ListAdapter<Player, TeamAAdapter.TeamAViewHolder>(Player.DIFF_CALLBACK) {
+    ListAdapter<PlayerVO, TeamAAdapter.TeamAViewHolder>(PlayerVO.DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamAViewHolder {
         val binding = TeamAItemBinding
@@ -27,13 +27,13 @@ class TeamAAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            player: Player?
+            player: PlayerVO?
         ) = with(binding) {
             player?.let {
-                tvTeamPlayerName.text = player.first_name
-                tvTeamPlayerNickname.text = player.name
+                tvTeamPlayerName.text = player.fullName
+                tvTeamPlayerNickname.text = player.nickName
                 Glide.with(itemView.context)
-                    .load(player.image_url)
+                    .load(player.imageUrl)
                     .error(R.drawable.no_logo)
                     .into(ivTeamPlayerFrame)
             }

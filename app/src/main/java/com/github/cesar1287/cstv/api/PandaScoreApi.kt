@@ -1,7 +1,7 @@
 package com.github.cesar1287.cstv.api
 
-import com.github.cesar1287.cstv.model.MatchesResponse
-import com.github.cesar1287.cstv.model.TeamsResponse
+import com.github.cesar1287.cstv.model.api.MatchesResponse
+import com.github.cesar1287.cstv.model.api.TeamsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

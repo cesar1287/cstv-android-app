@@ -2,7 +2,7 @@ package com.github.cesar1287.cstv.extensions
 
 import android.content.Context
 import com.github.cesar1287.cstv.R
-import com.github.cesar1287.cstv.model.MatchStatus
+import com.github.cesar1287.cstv.model.api.MatchStatus
 
 fun Context.datePretty(status: MatchStatus?, date: String?): String {
     return when(status) {

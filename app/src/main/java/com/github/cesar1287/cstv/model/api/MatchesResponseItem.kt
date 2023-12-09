@@ -1,4 +1,4 @@
-package com.github.cesar1287.cstv.model
+package com.github.cesar1287.cstv.model.api
 
 import android.os.Parcelable
 import com.github.cesar1287.cstv.model.vo.MatchVO

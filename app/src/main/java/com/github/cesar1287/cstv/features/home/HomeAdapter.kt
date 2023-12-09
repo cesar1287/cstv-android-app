@@ -11,8 +11,7 @@ import com.bumptech.glide.Glide
 import com.github.cesar1287.cstv.R
 import com.github.cesar1287.cstv.databinding.MatchItemBinding
 import com.github.cesar1287.cstv.extensions.datePretty
-import com.github.cesar1287.cstv.extensions.getPrettyDate
-import com.github.cesar1287.cstv.model.MatchStatus
+import com.github.cesar1287.cstv.model.api.MatchStatus
 import com.github.cesar1287.cstv.model.vo.MatchVO
 
 class HomeAdapter(

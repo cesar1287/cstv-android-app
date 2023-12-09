@@ -2,8 +2,8 @@ package com.github.cesar1287.cstv.features.matchdetail.data
 
 import com.github.cesar1287.cstv.api.PandaScoreApi
 import com.github.cesar1287.cstv.base.BaseRepository
-import com.github.cesar1287.cstv.model.TeamsResponse
-import com.github.cesar1287.cstv.model.toUIModel
+import com.github.cesar1287.cstv.model.api.TeamsResponse
+import com.github.cesar1287.cstv.model.api.toUIModel
 import com.github.cesar1287.cstv.model.vo.TeamsVO
 import com.github.cesar1287.cstv.utils.ResponseApi
 import javax.inject.Inject

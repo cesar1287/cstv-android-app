@@ -3,8 +3,8 @@ package com.github.cesar1287.cstv.features.home
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.cesar1287.cstv.api.PandaScoreApi
-import com.github.cesar1287.cstv.model.MatchStatus
-import com.github.cesar1287.cstv.model.toUIModel
+import com.github.cesar1287.cstv.model.api.MatchStatus
+import com.github.cesar1287.cstv.model.api.toUIModel
 import com.github.cesar1287.cstv.model.vo.MatchVO
 import retrofit2.HttpException
 import java.io.IOException
