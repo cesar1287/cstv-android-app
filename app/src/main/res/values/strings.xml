@@ -7,4 +7,6 @@
     <string name="match_item_live_now_label">Agora</string>
     <string name="match_item_today_match_label">Hoje, %1$s</string>
     <string name="match_item_tdb_team">Time a definir</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
