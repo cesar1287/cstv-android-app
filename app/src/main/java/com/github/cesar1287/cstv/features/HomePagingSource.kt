@@ -3,6 +3,7 @@ package com.github.cesar1287.cstv.features
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.cesar1287.cstv.api.PandaScoreApi
+import com.github.cesar1287.cstv.model.MatchStatus
 import com.github.cesar1287.cstv.model.toUIModel
 import com.github.cesar1287.cstv.model.vo.MatchVO
 import retrofit2.HttpException
@@ -24,7 +25,13 @@ class HomePagingSource @Inject constructor(
                 sort = "-status,-begin_at"
             )
             LoadResult.Page(
-                data = response.body()?.map { it.toUIModel() } ?: listOf(),
+                data = response.body()
+                    ?.filter {
+                        it.status != MatchStatus.POSTPONED
+                    }
+                    ?.map {
+                        it.toUIModel()
+                    } ?: listOf(),
                 prevKey = null, // Only paging forward.
                 nextKey = nextPageNumber + 1
             )

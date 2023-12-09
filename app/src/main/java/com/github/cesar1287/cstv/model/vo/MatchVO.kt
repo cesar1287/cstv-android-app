@@ -11,5 +11,6 @@ data class MatchVO(
     val logoTeamB: String?,
     val nameLeagueSerie: String?,
     val logoLeague: String?,
-    val status: MatchStatus?
+    val status: MatchStatus?,
+    val beginAt: String?
 )

@@ -5,4 +5,5 @@
     <string name="versus_label">vs</string>
 
     <string name="match_item_live_now_label">Agora</string>
+    <string name="match_item_today_match_label">Hoje, %1$s</string>
 </resources>

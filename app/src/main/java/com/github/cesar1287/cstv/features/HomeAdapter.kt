@@ -3,12 +3,14 @@ package com.github.cesar1287.cstv.features
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.cesar1287.cstv.R
 import com.github.cesar1287.cstv.databinding.MatchItemBinding
+import com.github.cesar1287.cstv.extensions.getPrettyDate
 import com.github.cesar1287.cstv.model.MatchStatus
 import com.github.cesar1287.cstv.model.vo.MatchVO
 
@@ -73,7 +75,27 @@ class HomeViewHolder(
                     )
                     tvMatchTime.text = itemView.context.getString(R.string.match_item_live_now_label)
                 }
-                else -> {}
+                MatchStatus.FINISHED,
+                MatchStatus.NOT_STARTED,
+                MatchStatus.STATUS_NOT_PLAYED -> {
+                    tvMatchTime.backgroundTintList = ContextCompat.getColorStateList(
+                        itemView.context,
+                        R.color.not_live
+                    )
+                    val matchTime = matchVO.beginAt?.getPrettyDate()
+                    if (matchTime?.first == true) {
+                        tvMatchTime.text = itemView.context.getString(
+                            R.string.match_item_today_match_label,
+                            matchTime.second
+                        )
+                    }
+                    else {
+                        tvMatchTime.text = matchTime?.second
+                    }
+                }
+                else -> {
+                    tvMatchTime.isVisible = false
+                }
             }
         }
     }
