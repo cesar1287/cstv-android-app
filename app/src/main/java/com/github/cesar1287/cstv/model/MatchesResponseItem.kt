@@ -28,8 +28,10 @@ fun MatchesResponseItem.toUIModel(): MatchVO {
     return MatchVO(
         id = this.id,
         serieId = this.serieId,
+        teamAId = teamA?.id ?: 0,
         nameTeamA = teamA?.name,
         logoTeamA = teamA?.imageUrl ?: "",
+        teamBId = teamB?.id ?: 0,
         nameTeamB = teamB?.name,
         logoTeamB = teamB?.imageUrl ?: "",
         nameLeagueSerie = "${league.name} - ${serie.fullName}",

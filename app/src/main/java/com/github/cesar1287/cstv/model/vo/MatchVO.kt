@@ -8,8 +8,10 @@ import kotlinx.parcelize.Parcelize
 data class MatchVO(
     val id: Int,
     val serieId: Int,
+    val teamAId: Int,
     val nameTeamA: String?,
     val logoTeamA: String?,
+    val teamBId: Int,
     val nameTeamB: String?,
     val logoTeamB: String?,
     val nameLeagueSerie: String?,
