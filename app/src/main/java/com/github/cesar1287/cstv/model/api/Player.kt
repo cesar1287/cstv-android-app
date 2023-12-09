@@ -11,12 +11,12 @@ data class Player(
     val age: Int,
     val birthday: String?,
     @SerializedName("first_name")
-    val firstName: String,
+    val firstName: String?,
     val id: Int,
     @SerializedName("image_url")
     val imageUrl: String?,
     @SerializedName("last_name")
-    val lastName: String,
+    val lastName: String?,
     val name: String,
     val nationality: String,
     val slug: String
@@ -25,7 +25,7 @@ data class Player(
 fun Player.toUIModel(): PlayerVO {
     return PlayerVO(
         id = this.id,
-        fullName = "${this.firstName} ${this.lastName}",
+        fullName = "${this.firstName ?: ""} ${this.lastName ?: ""}",
         nickName = this.name,
         imageUrl = this.imageUrl
     )
