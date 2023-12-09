@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.cesar1287.cstv.databinding.FragmentHomeBinding
@@ -22,7 +23,11 @@ class HomeFragment : Fragment() {
 
     private val homeAdapter: HomeAdapter by lazy {
         HomeAdapter { onMatchClicked ->
-
+            onMatchClicked?.let {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToMatchDetailFragment(it)
+                )
+            }
         }
     }
 
