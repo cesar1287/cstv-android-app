@@ -19,7 +19,10 @@ class HomePagingSource @Inject constructor(
         return try {
             // Start refresh at page 1 if undefined.
             val nextPageNumber = params.key ?: 1
-            val response = pandaScoreApi.getMatches(nextPageNumber)
+            val response = pandaScoreApi.getMatches(
+                nextPageNumber,
+                sort = "-status,-begin_at"
+            )
             LoadResult.Page(
                 data = response.body()?.map { it.toUIModel() } ?: listOf(),
                 prevKey = null, // Only paging forward.

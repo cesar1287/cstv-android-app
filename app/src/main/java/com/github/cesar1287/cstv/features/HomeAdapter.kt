@@ -2,12 +2,14 @@ package com.github.cesar1287.cstv.features
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.cesar1287.cstv.R
 import com.github.cesar1287.cstv.databinding.MatchItemBinding
+import com.github.cesar1287.cstv.model.MatchStatus
 import com.github.cesar1287.cstv.model.vo.MatchVO
 
 class HomeAdapter(
@@ -61,6 +63,17 @@ class HomeViewHolder(
 
             vgMatchCardContainer.setOnClickListener {
                 onMatchClicked(matchVO)
+            }
+
+            when(matchVO?.status) {
+                MatchStatus.RUNNING -> {
+                    tvMatchTime.backgroundTintList = ContextCompat.getColorStateList(
+                        itemView.context,
+                        R.color.live_now
+                    )
+                    tvMatchTime.text = itemView.context.getString(R.string.match_item_live_now_label)
+                }
+                else -> {}
             }
         }
     }

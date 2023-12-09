@@ -3,4 +3,6 @@
 
     <string name="home_title">Partidas</string>
     <string name="versus_label">vs</string>
+
+    <string name="match_item_live_now_label">Agora</string>
 </resources>

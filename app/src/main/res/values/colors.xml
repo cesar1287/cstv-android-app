@@ -12,4 +12,6 @@
 
     <color name="cstv_app_background">#252525</color>
     <color name="match_card_background">#272639</color>
+
+    <color name="live_now">#F42A35</color>
 </resources>

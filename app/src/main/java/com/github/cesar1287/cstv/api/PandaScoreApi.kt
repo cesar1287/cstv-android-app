@@ -10,6 +10,7 @@ interface PandaScoreApi {
     @GET("csgo/matches")
     suspend fun getMatches(
         @Query("page") page: Int,
-        @Query("per_page") perPage: Int = 20
+        @Query("per_page") perPage: Int = 20,
+        @Query("sort") sort: String
     ): Response<MatchesResponse>
 }

@@ -18,7 +18,7 @@ data class MatchesResponseItem(
     val serie: Serie,
     @SerializedName("serie_id")
     val serieId: Int,
-    val status: String
+    val status: MatchStatus
 ) : Parcelable
 
 fun MatchesResponseItem.toUIModel(): MatchVO {
@@ -33,6 +33,18 @@ fun MatchesResponseItem.toUIModel(): MatchVO {
         nameTeamB = teamB?.name ?: "",
         logoTeamB = teamB?.imageUrl ?: "",
         nameLeagueSerie = "${league.name} - ${serie.fullName}",
-        logoLeague = league.imageUrl
+        logoLeague = league.imageUrl,
+        status = this.status
     )
+}
+
+enum class MatchStatus {
+    @SerializedName("finished")
+    FINISHED,
+    @SerializedName("not_started")
+    NOT_STARTED,
+    @SerializedName("running")
+    RUNNING,
+    @SerializedName("not_played")
+    STATUS_NOT_PLAYED
 }
