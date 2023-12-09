@@ -7,6 +7,10 @@
     <string name="match_item_live_now_label">Agora</string>
     <string name="match_item_today_match_label">Hoje, %1$s</string>
     <string name="match_item_tdb_team">Time a definir</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="button_home_try_again">Ocorreu um erro, tente novamente</string>
+    <string name="match_item_ended_label">Encerrado</string>
+    <string name="error_default">Erro, algo inesperado aconteceu, tente novamente!</string>
+    <string name="try_again_label">Tentar novamente</string>
+    <string name="error_loading_players">Ocorreu um erro ao carregar os players, tente novamente!</string>
 </resources>

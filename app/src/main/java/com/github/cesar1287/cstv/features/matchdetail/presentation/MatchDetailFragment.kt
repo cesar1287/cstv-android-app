@@ -1,4 +1,4 @@
-package com.github.cesar1287.cstv.features.matchdetail
+package com.github.cesar1287.cstv.features.matchdetail.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
