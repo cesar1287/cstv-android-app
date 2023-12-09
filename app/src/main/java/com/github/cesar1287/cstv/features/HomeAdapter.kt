@@ -6,6 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.cesar1287.cstv.R
 import com.github.cesar1287.cstv.databinding.MatchItemBinding
 import com.github.cesar1287.cstv.model.vo.MatchVO
 
@@ -43,16 +44,19 @@ class HomeViewHolder(
             Glide
                 .with(itemView.context)
                 .load(matchVO?.logoTeamA)
+                .error(R.drawable.no_logo)
                 .into(ivMatchTeamA)
 
             Glide
                 .with(itemView.context)
                 .load(matchVO?.logoTeamB)
+                .error(R.drawable.no_logo)
                 .into(ivMatchTeamB)
 
             Glide
                 .with(itemView.context)
                 .load(matchVO?.logoLeague)
+                .error(R.drawable.no_logo)
                 .into(ivMatchLeagueSeries)
 
             vgMatchCardContainer.setOnClickListener {

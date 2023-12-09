@@ -16,6 +16,16 @@
         android:background="@color/match_card_background">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/match_time_background"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Hoje, 21:00" />
+
+        <TextView
             android:id="@+id/vgMatchVersusLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
