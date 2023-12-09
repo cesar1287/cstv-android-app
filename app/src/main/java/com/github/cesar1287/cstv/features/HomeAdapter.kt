@@ -43,7 +43,9 @@ class HomeViewHolder(
             tvMatchLeagueSeries.text = matchVO?.nameLeagueSerie
 
             tvMatchTeamA.text = matchVO?.nameTeamA
+                ?: itemView.context.getString(R.string.match_item_tdb_team)
             tvMatchTeamB.text = matchVO?.nameTeamB
+                ?: itemView.context.getString(R.string.match_item_tdb_team)
 
             Glide
                 .with(itemView.context)
