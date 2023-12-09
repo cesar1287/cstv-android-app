@@ -1,4 +1,4 @@
-package com.github.cesar1287.cstv.features
+package com.github.cesar1287.cstv.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

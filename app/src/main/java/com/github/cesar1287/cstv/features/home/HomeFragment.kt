@@ -1,4 +1,4 @@
-package com.github.cesar1287.cstv.features
+package com.github.cesar1287.cstv.features.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

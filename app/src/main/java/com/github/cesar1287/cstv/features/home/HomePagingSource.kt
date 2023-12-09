@@ -1,4 +1,4 @@
-package com.github.cesar1287.cstv.features
+package com.github.cesar1287.cstv.features.home
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
