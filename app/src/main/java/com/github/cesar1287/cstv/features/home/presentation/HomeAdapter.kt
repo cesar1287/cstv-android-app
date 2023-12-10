@@ -1,4 +1,4 @@
-package com.github.cesar1287.cstv.features.home
+package com.github.cesar1287.cstv.features.home.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.github.cesar1287.cstv.features.home
+package com.github.cesar1287.cstv.features.home.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -78,13 +78,13 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.flow.collectLatest { pagingData ->
+            viewModel.matches.collectLatest { pagingData ->
                 homeAdapter.submitData(pagingData)
             }
         }
     }
 
-    override fun onUserWithoutInternet() {
+    override fun onUserWithoutInternetError() {
         with(binding) {
             pbHomeLoading.isVisible = false
             tvHomeTitle.isVisible = false
