@@ -52,7 +52,7 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
 
         viewLifecycleOwner.lifecycleScope.launch {
             homeAdapter.loadStateFlow.collectLatest {
-                when(val loadState = it.refresh) {
+                when (val loadState = it.refresh) {
                     is LoadState.Loading -> {
                         with(binding) {
                             pbHomeLoading.isVisible = true
@@ -62,8 +62,10 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
                             btErrorTryAgain.isVisible = false
                         }
                     }
+
                     is LoadState.NotLoading -> {
                         with(binding) {
+                            swRefreshMatches.isRefreshing = false
                             pbHomeLoading.isVisible = false
                             rvHomeMatches.isVisible = true
                             tvHomeTitle.isVisible = true
@@ -71,6 +73,7 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
                             btErrorTryAgain.isVisible = false
                         }
                     }
+
                     is LoadState.Error -> {
                         viewModel.handleError(loadState.error)
                     }
@@ -113,13 +116,19 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
     }
 
     private fun setupView() {
-        binding.rvHomeMatches.apply {
-            adapter = homeAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
+        with(binding) {
+            rvHomeMatches.apply {
+                adapter = homeAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
 
-        binding.btErrorTryAgain.setOnClickListener {
-            homeAdapter.refresh()
+            btErrorTryAgain.setOnClickListener {
+                homeAdapter.refresh()
+            }
+
+            swRefreshMatches.setOnRefreshListener {
+                homeAdapter.refresh()
+            }
         }
     }
 }

@@ -17,14 +17,20 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHomeMatches"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swRefreshMatches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvHomeTitle"
-        android:visibility="gone"
-        tools:listitem="@layout/match_item"
-        tools:visibility="visible" />
+        android:layout_below="@id/tvHomeTitle">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHomeMatches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:listitem="@layout/match_item"
+            tools:visibility="visible" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/pbHomeLoading"
