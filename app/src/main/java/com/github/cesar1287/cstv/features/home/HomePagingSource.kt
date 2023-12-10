@@ -31,17 +31,23 @@ class HomePagingSource @Inject constructor(
                 sort = "$API_KEY_QUERY_STATUS,$API_KEY_QUERY_BEGIN_AT",
                 range = "${range.first},${range.second}"
             )
-            LoadResult.Page(
-                data = response.body()
-                    ?.filter {
-                        it.status != MatchStatus.POSTPONED
-                    }
-                    ?.map {
-                        it.toUIModel()
-                    } ?: listOf(),
-                prevKey = null, // Only paging forward.
-                nextKey = nextPageNumber + 1
-            )
+
+            if (response.isSuccessful) {
+                LoadResult.Page(
+                    data = response.body()
+                        ?.filter {
+                            it.status != MatchStatus.POSTPONED
+                        }
+                        ?.map {
+                            it.toUIModel()
+                        } ?: listOf(),
+                    prevKey = null, // Only paging forward.
+                    nextKey = nextPageNumber + 1
+                )
+            }
+            else {
+                LoadResult.Error(UnknownError())
+            }
         } catch (e: IOException) {
             // IOException for network failures.
             LoadResult.Error(e)

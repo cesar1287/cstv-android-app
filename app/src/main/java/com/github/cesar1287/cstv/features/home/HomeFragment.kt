@@ -15,9 +15,10 @@ import com.github.cesar1287.cstv.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeViewModel.Delegate {
 
     private val viewModel: HomeViewModel by viewModels()
 
@@ -44,6 +45,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.delegate = WeakReference(this)
 
         setupRecyclerView()
 
@@ -76,6 +78,18 @@ class HomeFragment : Fragment() {
                 homeAdapter.submitData(pagingData)
             }
         }
+    }
+
+    override fun onUserWithoutInternet() {
+        binding.pbHomeLoading.isVisible = false
+    }
+
+    override fun onApiError() {
+        binding.pbHomeLoading.isVisible = false
+    }
+
+    override fun onUnknownError() {
+        binding.pbHomeLoading.isVisible = false
     }
 
     private fun setupRecyclerView() {
