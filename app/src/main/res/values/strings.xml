@@ -10,7 +10,9 @@
 
     <string name="button_home_try_again">Ocorreu um erro, tente novamente</string>
     <string name="match_item_ended_label">Encerrado</string>
-    <string name="error_default">Erro, algo inesperado aconteceu, tente novamente!</string>
     <string name="try_again_label">Tentar novamente</string>
+
+    <string name="error_default">Erro, algo inesperado aconteceu, tente novamente!</string>
     <string name="error_loading_players">Ocorreu um erro ao carregar os players, tente novamente!</string>
+    <string name="error_no_connection">Sem conexão, verifique sua internet e tente novamente!</string>
 </resources>

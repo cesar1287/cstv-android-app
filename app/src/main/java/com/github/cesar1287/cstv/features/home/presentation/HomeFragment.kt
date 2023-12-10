@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.cesar1287.cstv.R
 import com.github.cesar1287.cstv.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -85,31 +86,28 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
     }
 
     override fun onUserWithoutInternetError() {
-        with(binding) {
-            pbHomeLoading.isVisible = false
-            tvHomeTitle.isVisible = false
-            rvHomeMatches.isVisible = false
-            tvErrorTitle.isVisible = true
-            btErrorTryAgain.isVisible = true
-        }
+        setupErrorView(
+            customMessage = getString(R.string.error_no_connection)
+        )
     }
 
     override fun onApiError() {
-        with(binding) {
-            pbHomeLoading.isVisible = false
-            tvHomeTitle.isVisible = false
-            rvHomeMatches.isVisible = false
-            tvErrorTitle.isVisible = true
-            btErrorTryAgain.isVisible = true
-        }
+        setupErrorView()
     }
 
     override fun onUnknownError() {
+        setupErrorView()
+    }
+
+    private fun setupErrorView(
+        customMessage: String = getString(R.string.error_default)
+    ) {
         with(binding) {
             pbHomeLoading.isVisible = false
             tvHomeTitle.isVisible = false
             rvHomeMatches.isVisible = false
             tvErrorTitle.isVisible = true
+            tvErrorTitle.text = customMessage
             btErrorTryAgain.isVisible = true
         }
     }
