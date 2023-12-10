@@ -47,7 +47,7 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
         super.onViewCreated(view, savedInstanceState)
         viewModel.delegate = WeakReference(this)
 
-        setupRecyclerView()
+        setupView()
 
         viewLifecycleOwner.lifecycleScope.launch {
             homeAdapter.loadStateFlow.collectLatest {
@@ -57,6 +57,8 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
                             pbHomeLoading.isVisible = true
                             rvHomeMatches.isVisible = false
                             tvHomeTitle.isVisible = false
+                            tvErrorTitle.isVisible = false
+                            btErrorTryAgain.isVisible = false
                         }
                     }
                     is LoadState.NotLoading -> {
@@ -64,6 +66,8 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
                             pbHomeLoading.isVisible = false
                             rvHomeMatches.isVisible = true
                             tvHomeTitle.isVisible = true
+                            tvErrorTitle.isVisible = false
+                            btErrorTryAgain.isVisible = false
                         }
                     }
                     is LoadState.Error -> {
@@ -81,21 +85,43 @@ class HomeFragment : Fragment(), HomeViewModel.Delegate {
     }
 
     override fun onUserWithoutInternet() {
-        binding.pbHomeLoading.isVisible = false
+        with(binding) {
+            pbHomeLoading.isVisible = false
+            tvHomeTitle.isVisible = false
+            rvHomeMatches.isVisible = false
+            tvErrorTitle.isVisible = true
+            btErrorTryAgain.isVisible = true
+        }
     }
 
     override fun onApiError() {
-        binding.pbHomeLoading.isVisible = false
+        with(binding) {
+            pbHomeLoading.isVisible = false
+            tvHomeTitle.isVisible = false
+            rvHomeMatches.isVisible = false
+            tvErrorTitle.isVisible = true
+            btErrorTryAgain.isVisible = true
+        }
     }
 
     override fun onUnknownError() {
-        binding.pbHomeLoading.isVisible = false
+        with(binding) {
+            pbHomeLoading.isVisible = false
+            tvHomeTitle.isVisible = false
+            rvHomeMatches.isVisible = false
+            tvErrorTitle.isVisible = true
+            btErrorTryAgain.isVisible = true
+        }
     }
 
-    private fun setupRecyclerView() {
+    private fun setupView() {
         binding.rvHomeMatches.apply {
             adapter = homeAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+
+        binding.btErrorTryAgain.setOnClickListener {
+            homeAdapter.refresh()
         }
     }
 }

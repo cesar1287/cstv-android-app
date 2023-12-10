@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import com.github.cesar1287.cstv.api.PandaScoreApi
 import com.github.cesar1287.cstv.model.exception.UnknownErrorException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.HttpException
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homePagingSource: HomePagingSource
+    private val pandaScoreApi: PandaScoreApi
 ) : ViewModel() {
 
     interface Delegate {
@@ -38,7 +39,9 @@ class HomeViewModel @Inject constructor(
         // PagingConfig, such as prefetchDistance.
         PagingConfig(pageSize = 20)
     ) {
-        homePagingSource
+        HomePagingSource(
+            pandaScoreApi = pandaScoreApi
+        )
     }.flow
         .cachedIn(viewModelScope)
 }
