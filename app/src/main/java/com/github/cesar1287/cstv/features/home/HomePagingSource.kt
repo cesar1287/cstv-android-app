@@ -3,6 +3,7 @@ package com.github.cesar1287.cstv.features.home
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.cesar1287.cstv.api.PandaScoreApi
+import com.github.cesar1287.cstv.extensions.getRangeApiDate
 import com.github.cesar1287.cstv.model.api.MatchStatus
 import com.github.cesar1287.cstv.model.api.toUIModel
 import com.github.cesar1287.cstv.model.vo.MatchVO
@@ -10,11 +11,14 @@ import com.github.cesar1287.cstv.utils.Constants.Companion.API_KEY_QUERY_BEGIN_A
 import com.github.cesar1287.cstv.utils.Constants.Companion.API_KEY_QUERY_STATUS
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.Calendar
 import javax.inject.Inject
 
 class HomePagingSource @Inject constructor(
     private val pandaScoreApi: PandaScoreApi
 ): PagingSource<Int, MatchVO>() {
+
+    private val range = getApiDatesRange()
 
     override suspend fun load(
         params: LoadParams<Int>
@@ -24,7 +28,8 @@ class HomePagingSource @Inject constructor(
             val nextPageNumber = params.key ?: 1
             val response = pandaScoreApi.getMatches(
                 nextPageNumber,
-                sort = "$API_KEY_QUERY_STATUS,$API_KEY_QUERY_BEGIN_AT"
+                sort = "$API_KEY_QUERY_STATUS,$API_KEY_QUERY_BEGIN_AT",
+                range = "${range.first},${range.second}"
             )
             LoadResult.Page(
                 data = response.body()
@@ -58,5 +63,22 @@ class HomePagingSource @Inject constructor(
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
+    }
+
+    /*
+    * We can use `rangeOfMonths` as a remote config to have a better personalized way to get faster
+    * answers from backend, based on user usage, if the overall user never see more than 4/5 pages
+    * isn't necessary get a range of matches between 1 year.
+    * */
+    private fun getApiDatesRange(
+        rangeOfMonths: Int? = null
+    ): Pair<String, String> {
+        val currentDate = Calendar.getInstance()
+        val initialDate = Calendar.getInstance()
+        initialDate.add(Calendar.MONTH, -(rangeOfMonths ?: 12))
+
+        val firstDate = initialDate.time.getRangeApiDate()
+        val secondDate = currentDate.time.getRangeApiDate()
+        return Pair(firstDate, secondDate)
     }
 }

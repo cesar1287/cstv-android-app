@@ -13,6 +13,7 @@ private const val UTC_TIME_ZONE = "UTC"
 private const val MATCH_CARD_DATE_FORMAT = "dd.MM HH:mm"
 private const val MATCH_CARD_DATE_FORMAT_HOUR_ONLY = "HH:mm"
 private const val DAY_OF_WEEK_NAME = "EEE"
+private const val RANGE_API_DATE_FORMAT = "yyyy-MM-dd"
 
 fun String.getPrettyDate(): Pair<Boolean, String> {
     //UTC Date - Default
@@ -58,4 +59,9 @@ private fun isThisWeek(userDate: Date?): Boolean {
         currentDayCalendar.get(Calendar.WEEK_OF_YEAR) ==
                 userDateCalendar.get(Calendar.WEEK_OF_YEAR)
     } ?: false
+}
+
+fun Date.getRangeApiDate(): String {
+    val simpleDateFormat = SimpleDateFormat(RANGE_API_DATE_FORMAT, Locale.getDefault())
+    return simpleDateFormat.format(this)
 }

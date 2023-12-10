@@ -12,6 +12,7 @@ interface PandaScoreApi {
     suspend fun getMatches(
         @Query("page") page: Int,
         @Query("per_page") perPage: Int = 20,
+        @Query("range[begin_at]") range: String,
         @Query("sort") sort: String
     ): Response<MatchesResponse>
 
