@@ -53,14 +53,14 @@ class MatchDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.command = command
+        viewModel.getTeams(match.teamAId, match.teamBId)
+
         setupView()
         setupObservables()
     }
 
     private fun setupObservables() {
-        viewModel.command = command
-        viewModel.getTeams(match.teamAId, match.teamBId)
-
         viewModel.onTeamsLoaded.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it?.noTeamsResponse == false) {

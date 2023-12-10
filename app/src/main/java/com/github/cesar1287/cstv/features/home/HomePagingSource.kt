@@ -6,6 +6,8 @@ import com.github.cesar1287.cstv.api.PandaScoreApi
 import com.github.cesar1287.cstv.model.api.MatchStatus
 import com.github.cesar1287.cstv.model.api.toUIModel
 import com.github.cesar1287.cstv.model.vo.MatchVO
+import com.github.cesar1287.cstv.utils.Constants.Companion.API_KEY_QUERY_BEGIN_AT
+import com.github.cesar1287.cstv.utils.Constants.Companion.API_KEY_QUERY_STATUS
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -22,7 +24,7 @@ class HomePagingSource @Inject constructor(
             val nextPageNumber = params.key ?: 1
             val response = pandaScoreApi.getMatches(
                 nextPageNumber,
-                sort = "-status,-begin_at"
+                sort = "$API_KEY_QUERY_STATUS,$API_KEY_QUERY_BEGIN_AT"
             )
             LoadResult.Page(
                 data = response.body()
