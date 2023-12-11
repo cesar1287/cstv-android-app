@@ -7,7 +7,7 @@ import com.github.cesar1287.cstv.model.api.MatchStatus
 fun Context.datePretty(status: MatchStatus?, date: String?): String {
     return when(status) {
         MatchStatus.RUNNING -> this.getString(R.string.match_item_live_now_label)
-        MatchStatus.FINISHED,
+        MatchStatus.FINISHED -> this.getString(R.string.match_item_finished_label)
         MatchStatus.NOT_STARTED,
         MatchStatus.STATUS_NOT_PLAYED -> {
             val matchTime = date?.getPrettyDate()
