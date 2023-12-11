@@ -81,10 +81,10 @@ class HomePagingSource @Inject constructor(
     ): Pair<String, String> {
         val currentDate = Calendar.getInstance()
         val initialDate = Calendar.getInstance()
-        initialDate.add(Calendar.MONTH, -(rangeOfMonths ?: 12))
+        initialDate.add(Calendar.MONTH, (rangeOfMonths ?: 12))
 
         val firstDate = initialDate.time.getRangeApiDate()
         val secondDate = currentDate.time.getRangeApiDate()
-        return Pair(firstDate, secondDate)
+        return Pair(secondDate, firstDate)
     }
 }
